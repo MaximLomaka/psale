@@ -1,1 +1,31 @@
 {% extends 'store/index.html' %}
+{% block content %}
+    <h3>You wanna buy this account? </h3>
+    <h4>Price:45</h4>
+    <ul>Games:
+        <li>Starcraf2</li>
+        <li>Hearthstone</li>
+
+    </ul>
+
+
+
+
+    <form class="form-inline">
+        <div class="form-group mb-2">
+            <h5>Current bit:34</h5>
+
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+
+            <label for="bit" class="sr-only">Your bit</label>
+
+            <input type="number" class="form-control" id="bit" placeholder="Bit">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Confirm</button>
+    </form>
+
+
+{% endblock %}
