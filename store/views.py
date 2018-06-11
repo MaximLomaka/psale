@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from store.models import Advertisement
+
+
+class AdListView(ListView):
+    template_name = 'store/index.html'
+    queryset = Advertisement.objects.all()

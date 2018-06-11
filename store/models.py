@@ -1,3 +1,7 @@
-from django.db import models
+from django.db.models import Model, CharField, IntegerField
 
-# Create your models here.
+
+class Advertisement(Model):
+    price = IntegerField()
+    description = CharField(max_length=50)
+    platform = CharField(max_length=20)
