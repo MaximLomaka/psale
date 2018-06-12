@@ -14,8 +14,8 @@
 
 <div>
     <nav class="navbar  navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"> <img src="{% static 'img/PSN-logo.jpg' %} " width="40px " height="30px"
-                                               href="{% url 'store:index' %}"> </a>
+        <a class="navbar-brand" href="{% url 'store:index' %}"> <img src="{% static 'img/PSN-logo.jpg' %} "
+                                                                     width="40px " height="30px"> </a>
 
         <ul class="nav navbar-nav  ml-auto">
             <li class="nav-item active">
@@ -29,42 +29,43 @@
 {% block content %}
 
 
-<div>
+    <div>
 
-    <div class="dropdown">
+        <div class="dropdown">
 
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            Platform
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">PS4</a>
-            <a class="dropdown-item" href="#">x-box</a>
-            <a class="dropdown-item" href="#">PC peasant </a>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                Platform
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">PS4</a>
+                <a class="dropdown-item" href="#">x-box</a>
+                <a class="dropdown-item" href="#">PC peasant </a>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div>
+
+        <div class="card border-secondary  mb-3" style="max-width: 18rem;">
+            <div class="card-header" href="1">Battle net</div>
+            <div class="card-body text-secondary">
+                <h5 class="card-title">Games:</h5>
+                <ul>
+                    <li>Starcraft 2</li>
+                    <li>WoW</li>
+                </ul>
+                <a href="2" class="btn btn-primary"> Buy</a>
+            </div>
+
         </div>
     </div>
 
-
-</div>
-
-<div>
-
-    <div class="card border-secondary  mb-3" style="max-width: 18rem;">
-        <div class="card-header" href="1">Battle net</div>
-        <div class="card-body text-secondary">
-            <h5 class="card-title">Games:</h5>
-            <ul>
-                <li>Starcraft 2</li>
-                <li>WoW</li>
-            </ul>
-            <a href="2" class="btn btn-primary"> Buy</a>
-        </div>
-
-    </div>
-</div>
-
-<br>
-<h3 class="mr-4">Buyer protection</h3>
+    <br>
+    <h3 class="mr-4">Buyer protection</h3>
 
 
 {% endblock %}
