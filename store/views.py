@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import ListView, FormView
+from rest_framework.viewsets import ModelViewSet
 
 from store.forms import UserForm
 from store.models import Advertisement
+from store.serializers import AdSerializer
 
 
 class AdListView(ListView):
@@ -23,7 +25,16 @@ class CreateUserView(FormView):
     success_url = reverse_lazy('store:index')
 
     def form_valid(self, form):
-        form.save(form)
+        user = form.save(form)
+        user.set_password(form['password'].value())
         messages.success(self.request, 'user was created successfully')
 
         return super().form_valid(form)
+
+
+'''viewsets for serializers'''
+
+
+class AdViewSet(ModelViewSet):
+    queryset = Advertisement.objects.all()
+    serializer_class = AdSerializer
