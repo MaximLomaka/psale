@@ -18,9 +18,17 @@
                                                                      width="40px " height="30px"> </a>
 
         <ul class="nav navbar-nav  ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'auth:login' %}">log in </a>
-            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item active">Welcome, {{ user }} </li>
+                <li class="nav-item active"><a href="{% url 'auth:logout' %}"> logout</a></li>
+
+            {% else %}
+                <li class="nav-item active">
+
+                    <a class="nav-link" href="{% url 'auth:login' %}">log in </a>
+                </li>
+            {% endif %}
+
         </ul>
 
     </nav>
