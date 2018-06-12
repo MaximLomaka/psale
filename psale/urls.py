@@ -11,5 +11,6 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
-    url(r'api/', include(router.urls))
+    url(r'api/', include(router.urls)),
+    path(r'auth/', include('auth.urls'))
 ]
