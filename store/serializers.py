@@ -13,4 +13,4 @@ class UserSerializer(HyperlinkedModelSerializer):
 class AdSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Advertisement
-        exclude = ('time_of_create',)
+        exclude = ('date_of_creation', 'bid')
