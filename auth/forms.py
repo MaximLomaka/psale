@@ -18,7 +18,6 @@ class UserCreate(ModelForm):
 
         if password != confirm_password:
             self.add_error('confirm_password', "Password does not match")
-        print(cleaned_data)
 
         return cleaned_data
 
