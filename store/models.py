@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.db.models import Model, CharField, IntegerField, DateTimeField, ForeignKey, CASCADE, \
-    ManyToManyField
+    ManyToManyField, OneToOneField
 
 
 # class User(Model):
@@ -17,7 +17,8 @@ from django.db.models import Model, CharField, IntegerField, DateTimeField, Fore
 #     def __str__(self):
 #         return self.first_name + ' ' + self.last_name
 class Money(Model):
-    user = ForeignKey(User, on_delete=CASCADE, related_query_name='moneys', related_name='money')
+    user = OneToOneField(User, on_delete=CASCADE, related_query_name='moneys', related_name='money')
+    coins = IntegerField(default=0)
 
 
 class Game(Model):
