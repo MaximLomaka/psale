@@ -16,6 +16,7 @@ class UserSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user.set_password(form['password'])
+        # save user with hashed password
         form.save()
         login(self.request, user)
         return redirect('store:index')
