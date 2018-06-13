@@ -1,0 +1,19 @@
+{% extends 'store/index.html' %}
+{% block title %}
+    <title>{{ user }}</title>
+{% endblock %}
+{% block content %}
+    <h3>Your ads</h3>
+    <h3>Get coins</h3>
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <p>Now you have {{ user.money.coins }}</p>
+                <input type="text" class="form-control" placeholder="Add coins">
+            </div>
+
+        </div>
+    </form>
+
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from rest_framework.viewsets import ModelViewSet
 
 from store.models import Advertisement
@@ -16,7 +16,9 @@ class AdDetailView(ListView):
     model = Advertisement
 
 
-
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'store/user-detail.html'
 
 
 '''viewsets for serializers'''
