@@ -23,14 +23,13 @@ class UserSignUpView(CreateView):
         user.set_password(form['password'])
         # save user with hashed password
         form.save()
+
         login(self.request, user)
+
         return redirect('store:index')
 
 
 class UserLoginView(LoginView):
-    def __init__(self, *args, **kwargs):
-        super(UserLoginView, self).__init__(*args, **kwargs)
-
     authentication_form = UserLogin
     template_name = 'auth/singin.html'
 

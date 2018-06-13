@@ -5,7 +5,7 @@
 {% block content %}
     <form method="POST" enctype="multipart/form-data">{% csrf_token %}
         <ul class="list-group-item ">{{ form.as_ul }}</ul>
-
+        <button class="btn btn-lg btn-primary " type="submit">Sign in</button>
 
     </form>
 {% endblock %}
