@@ -5,14 +5,14 @@
 {% block content %}
     <h3>Your ads</h3>
     <h3>Get coins</h3>
-    <form>
-        <div class="form-row">
-            <div class="col">
-                <p>Now you have {{ user.money.coins }}</p>
-                <input type="text" class="form-control" placeholder="Add coins">
-            </div>
 
-        </div>
+
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <ul class="list-group-item ">{{ form.as_ul }}</ul>
+        <button class="btn btn-lg btn-primary " type="submit">Buy</button>
+
+
     </form>
 
 

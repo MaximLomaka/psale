@@ -1,5 +1,5 @@
 # Create your views here.
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
@@ -18,8 +18,6 @@ class UserSignUpView(CreateView):
     #
 
     def form_valid(self, form):
-        print('pass= ' + form['password'].value())
-        print('comf= ' + form['confirm_password'].value())
         user = form.save(commit=False)
 
         user.set_password(form['password'])
@@ -30,5 +28,20 @@ class UserSignUpView(CreateView):
 
 
 class UserLoginView(LoginView):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginView, self).__init__(*args, **kwargs)
+
     authentication_form = UserLogin
     template_name = 'auth/singin.html'
+
+    def get(self, request, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('store:index')
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(user=username, password=password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)

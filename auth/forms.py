@@ -23,7 +23,5 @@ class UserCreate(ModelForm):
 
 
 class UserLogin(ModelForm):
-    class Meta:
-        model = User
-
-        fields = ('username', 'password',)
+    username = CharField(max_length=15)
+    password = CharField(max_length=15)

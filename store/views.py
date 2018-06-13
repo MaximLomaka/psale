@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
-from django.views.generic import ListView, DetailView
+from django.shortcuts import redirect
+from django.views.generic import ListView, FormView, UpdateView
 from rest_framework.viewsets import ModelViewSet
 
-from store.models import Advertisement
+from store.forms import MoneyForm
+from store.models import Advertisement, Money
 from store.serializers import AdSerializer, UserSerializer
 
 
@@ -16,9 +18,26 @@ class AdDetailView(ListView):
     model = Advertisement
 
 
-class UserDetailView(DetailView):
-    model = User
+class GetMonetView(UpdateView):
+    model = Money
     template_name = 'store/user-detail.html'
+    fields = ('coins',)
+    success_url = '/'
+    # def get_object(self, queryset=None):
+    #     print(self.kwargs)
+    #     obj=Money.objects.all().filter(user_)
+    #     return obj
+
+
+class UserDetailView(FormView):
+    model = Money
+    template_name = 'store/user-detail.html'
+    form_class = MoneyForm
+
+    def form_valid(self, form):
+        if int(form['coins'].value()) > 0:
+            form.save()
+            return redirect('store:user_detail')
 
 
 '''viewsets for serializers'''

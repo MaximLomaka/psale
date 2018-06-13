@@ -23,10 +23,10 @@
         <ul class="nav navbar-nav  ml-auto">
             {% if user.is_authenticated %}
 
-                {{ user.coins }}
 
 
-                {{ user.money }}
+
+                <li>Balance: {{ user.money.coins }} $</li>
                 <li class="nav-item active"><a href="{% url 'store:user_detail' pk=user.id %}">
                     Welcome, {{ user }}   </a></li>
 
