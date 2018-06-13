@@ -13,8 +13,15 @@ class UserSignUpView(CreateView):
     form_class = UserCreate
     template_name = 'auth/singin.html'
 
+    # def form_invalid(self, form):
+    #     if form['password'] is not form['password']:
+    #
+
     def form_valid(self, form):
+        print('pass= ' + form['password'].value())
+        print('comf= ' + form['confirm_password'].value())
         user = form.save(commit=False)
+
         user.set_password(form['password'])
         # save user with hashed password
         form.save()
