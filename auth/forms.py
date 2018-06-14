@@ -11,7 +11,9 @@ class UserCreate(UserCreationForm):
     confirm_password = CharField(max_length=20, widget=PasswordInput())
 
     def clean(self):
+
         cleaned_data = super(UserCreate, self).clean()
+        # print(cleaned_data)
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
 

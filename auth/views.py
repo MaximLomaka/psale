@@ -11,11 +11,10 @@ from auth.forms import UserCreate, UserLogin
 class UserSignUpView(CreateView):
     model = User
     form_class = UserCreate
-    template_name = 'auth/singin.html'
+    template_name = 'auth/sign_up.html'
 
     def form_valid(self, form):
         user = form.save(commit=False)
-
         user.set_password(form['password'])
         # save user with hashed password
         form.save()
