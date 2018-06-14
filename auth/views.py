@@ -24,7 +24,7 @@ class UserSignUpView(CreateView):
     template_name = 'auth/sign_up.html'
 
     def form_invalid(self, form):
-        print('huevo')
+
         return redirect('auth:signup')
 
     def form_valid(self, form):
@@ -53,7 +53,7 @@ class UserSignUpView(CreateView):
 
         # login(self.request, user)
 
-        return redirect('store:index')
+        return redirect('auth:login')
 
 
 class UserLoginView(LoginView):
@@ -74,13 +74,13 @@ class UserLoginView(LoginView):
 
 class ActivateUserView(TemplateView):
 
-    def get(self, uidb64, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         try:
-            uid = force_text(urlsafe_base64_decode(uidb64))
+            uid = force_text(urlsafe_base64_decode(kwargs['uidb64']))
             user = User.objects.get(pk=uid)
         except(TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
-        if user is not None and account_activation_token.check_token(user, token):
+        if user is not None and account_activation_token.check_token(user, kwargs['token']):
             user.is_active = True
             user.save()
             login(request, user)
