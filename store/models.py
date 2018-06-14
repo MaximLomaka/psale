@@ -30,9 +30,10 @@ class Game(Model):
 # ad = ForeignKey(Advertisement, on_delete=CASCADE, related_query_name='games', related_name='game')
 class Advertisement(Model):
     PLATFORMS = (
-        ('PS4', 'PS4'),
-        ('XBOX 1', 'XBOX 1'),
-        ('PC', 'PC')
+        ('steam', 'steam'),
+        ('origin ', 'origin '),
+        ('uplay', 'uplay'),
+        ('battlenet', 'battlenet'),
     )
     price = IntegerField()
     description = CharField(max_length=50, null=True)

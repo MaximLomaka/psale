@@ -13,10 +13,6 @@ class UserSignUpView(CreateView):
     form_class = UserCreate
     template_name = 'auth/singin.html'
 
-    # def form_invalid(self, form):
-    #     if form['password'] is not form['password']:
-    #
-
     def form_valid(self, form):
         user = form.save(commit=False)
 
@@ -30,17 +26,16 @@ class UserSignUpView(CreateView):
 
 
 class UserLoginView(LoginView):
+    '''login view'''
     authentication_form = UserLogin
-    template_name = 'auth/singin.html'
-
-    def get(self, request, **kwargs):
-        if request.user.is_authenticated:
-            return redirect('store:index')
+    template_name = 'auth/login.html'
 
     def form_valid(self, form):
+        '''when form is valid we authenticate user '''
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user = authenticate(user=username, password=password)
+
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)

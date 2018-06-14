@@ -1,15 +1,14 @@
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-from django.forms import ModelForm, CharField, PasswordInput
+from django.forms import ModelForm, CharField, PasswordInput, EmailField
 
 
-class UserCreate(ModelForm):
+class UserCreate(UserCreationForm):
+    username = CharField(max_length=15)
+    email = EmailField(max_length=24)
+    password = CharField(max_length=20, widget=PasswordInput())
     confirm_password = CharField(max_length=20, widget=PasswordInput())
-
-    class Meta:
-        model = User
-
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
 
     def clean(self):
         cleaned_data = super(UserCreate, self).clean()
@@ -22,6 +21,6 @@ class UserCreate(ModelForm):
         return cleaned_data
 
 
-class UserLogin(ModelForm):
+class UserLogin(AuthenticationForm):
     username = CharField(max_length=15)
     password = CharField(max_length=15)

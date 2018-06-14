@@ -1,12 +1,13 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.contrib.auth.views import LoginView
+from django.urls import path, include
 
-from auth.views import UserSignUpView
+from auth.views import UserSignUpView, UserLoginView
 
 app_name = 'auth'
 urlpatterns = [
 
-    path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
+    path('login/', UserLoginView.as_view(), name='login'),
     path('signup/', UserSignUpView.as_view(), name='signup'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
 
