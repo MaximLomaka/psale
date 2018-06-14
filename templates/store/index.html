@@ -22,6 +22,8 @@
 
         <ul class="nav navbar-nav  ml-auto">
             {% if user.is_authenticated %}
+     
+
 
 
 
@@ -29,6 +31,7 @@
                 <li>Balance: {{ user.money.coins }} $</li>
                 <li class="nav-item active"><a href="{% url 'store:user_detail' pk=user.id %}">
                     Welcome, {{ user }}   </a></li>
+
 
                 <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
                 ></a>
@@ -60,6 +63,7 @@
                 <option>PS4</option>
                 <option>XboX one</option>
                 <option>PC</option>
+
             </select>
 
             <button type="submit" class="btn btn-primary">Submit</button>
