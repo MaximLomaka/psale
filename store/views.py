@@ -10,7 +10,7 @@ from store.serializers import AdSerializer, UserSerializer
 
 
 class AdListView(ListView):
-    template_name = 'store/main.html'
+    template_name = 'store/index.html'
     queryset = Advertisement.objects.all()
 
 

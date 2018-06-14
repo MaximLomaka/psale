@@ -24,13 +24,13 @@ class UserSignUpView(CreateView):
     template_name = 'auth/sign_up.html'
 
     def form_invalid(self, form):
-
         return redirect('auth:signup')
 
     def form_valid(self, form):
         print('dfsfsfas')
         user = form.save(commit=False)
         user.is_active = False
+        user.email = form.cleaned_data.get('email')
         user.save()
         current_site = get_current_site(self.request)
         mail_subject = 'Activate your account'

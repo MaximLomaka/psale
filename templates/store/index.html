@@ -26,7 +26,7 @@
 
 <header>
 
-    <div class="navbar navbar-light">
+    <nav class="navbar  navbar-dark bg-primary">
         <div class="container d-flex justify-content-between">
             <a href="#" class="navbar-brand d-flex align-items-center">
 
@@ -38,7 +38,7 @@
 
 
                 Balance: {{ user.money.coins }} $
-                <a href="{% url 'store:user_detail' pk=user.id %}">
+                <a style="color: grey" href="{% url 'store:user_detail' pk=user.id %}">
                     Welcome, {{ user }}   </a>
 
                 <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
@@ -53,7 +53,7 @@
                 <a class="nav-link" href="{% url 'auth:signup' %}">or sign up </a>
             {% endif %}
         </div>
-    </div>
+    </nav>
 </header>
 
 <main role="main">
@@ -61,8 +61,10 @@
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Platforms</h1>
-            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-                etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+            <p class="lead text-muted">
+
+
+            </p>
             <p>
                 <a href="#" class="btn btn-secondary my-2">Steam</a>
                 <a href="#" class="btn btn-secondary my-2">Origin</a>
@@ -110,8 +112,6 @@
         <p class="float-right">
 
 
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting
-            started guide</a>.</p>
     </div>
 </footer>
 
