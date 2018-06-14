@@ -22,7 +22,17 @@
 
         <ul class="nav navbar-nav  ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item active"><a> Welcome, {{ user }}   </a></li>
+     
+
+
+
+
+
+                <li>Balance: {{ user.money.coins }} $</li>
+                <li class="nav-item active"><a href="{% url 'store:user_detail' pk=user.id %}">
+                    Welcome, {{ user }}   </a></li>
+
+
                 <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
                 ></a>
 
@@ -81,6 +91,13 @@
     <br>
     <h3 class="mr-4">Buyer protection</h3>
 
+    {% if messages %}
+
+        {% for message in messages %}
+            <h3 class="alert-success success">{{ message }}</h3>
+
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}
 

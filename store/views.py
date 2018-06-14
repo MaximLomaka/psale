@@ -1,11 +1,10 @@
-from django.contrib import messages
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy
-from django.views.generic import ListView, FormView
+from django.shortcuts import redirect
+from django.views.generic import ListView, FormView, UpdateView
 from rest_framework.viewsets import ModelViewSet
 
-from store.forms import UserForm
-from store.models import Advertisement
+from store.forms import MoneyForm
+from store.models import Advertisement, Money
 from store.serializers import AdSerializer, UserSerializer
 
 
@@ -19,25 +18,26 @@ class AdDetailView(ListView):
     model = Advertisement
 
 
-class CreateUserView(FormView):
-    form_class = UserForm
-    template_name = 'store/registration.html'
+class GetMonetView(UpdateView):
+    model = Money
+    template_name = 'store/user-detail.html'
+    fields = ('coins',)
+    success_url = '/'
+    # def get_object(self, queryset=None):
+    #     print(self.kwargs)
+    #     obj=Money.objects.all().filter(user_)
+    #     return obj
 
-    success_url = reverse_lazy('store:index')
+
+class UserDetailView(FormView):
+    model = Money
+    template_name = 'store/user-detail.html'
+    form_class = MoneyForm
 
     def form_valid(self, form):
-        print(form)
-        # password = make_password(form['password'].value())
-        # print(password)
-        # form.password = password
-        form.save()
-        messages.success(self.request, 'user was created successfully')
-
-        return super().form_valid(form)
-
-    '''sign in view for log in user'''
-
-
+        if int(form['coins'].value()) > 0:
+            form.save()
+            return redirect('store:user_detail')
 
 
 '''viewsets for serializers'''
