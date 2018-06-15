@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, FormView, UpdateView, DetailView
+from django.views.generic import ListView, FormView, UpdateView, DetailView, CreateView
 from rest_framework.viewsets import ModelViewSet
 
 from store.forms import MoneyForm
@@ -27,8 +27,19 @@ class MoneyDetailView(UpdateView):
     success_url = reverse_lazy('store:index')
 
 
-
 '''viewsets for serializers'''
+
+
+class CreateAd(CreateView):
+    model = Advertisement
+    template_name = 'store/create_ad.html'
+    fields = ('price', 'description', 'platform', 'games')
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.user_id = self.kwargs['pk']
+        form.save()
+        return redirect('store:index')
 
 
 class AdViewSet(ModelViewSet):

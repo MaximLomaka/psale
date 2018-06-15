@@ -17,6 +17,7 @@ class UserSignUpView(CreateView):
     form_class = UserCreate
     template_name = 'auth/sign_up.html'
 
+
     def form_invalid(self, form):
         return redirect('auth:signup')
 
@@ -32,7 +33,8 @@ class UserSignUpView(CreateView):
 
 
 class UserDetailView(DetailView):
-    pass
+    queryset = User.objects.all()
+    template_name = 'auth/user-detail.html'
 
 
 class UserSigninView(LoginView):
