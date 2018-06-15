@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, FormView, UpdateView, DetailView
 from rest_framework.viewsets import ModelViewSet
 
@@ -19,22 +20,12 @@ class AdDetailView(ListView):
     model = Advertisement
 
 
-class GetMonetView(UpdateView):
+class MoneyDetailView(UpdateView):
     model = Money
-    template_name = 'store/user-detail.html'
-    fields = ('coins',)
-    success_url = '/'
-
-
-class UserDetailView(FormView):
-    model = Money
-    template_name = 'store/user-detail.html'
+    template_name = 'store/money_detail.html'
     form_class = MoneyForm
+    success_url = reverse_lazy('store:index')
 
-    def form_valid(self, form):
-        if int(form['coins'].value()) > 0:
-            form.save()
-            return redirect('store:user_detail')
 
 
 '''viewsets for serializers'''

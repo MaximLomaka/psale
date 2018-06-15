@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/style.css' %}">
 </head>
 
-{% block content %}
-
 
 <body>
 
@@ -37,8 +35,9 @@
 
 
 
-                Balance: {{ user.money.coins }} $
-                <a style="color: grey" href="{% url 'store:user_detail' pk=user.id %}">
+                <a style="color: grey" href=" {% url 'store:money_detail' pk=user.id %}">
+                    Balance: {{ user.money.coins }} $ </a>
+                <a style="color: grey" href="{% url 'auth:user_detail' pk=user.id %}">
                     Welcome, {{ user }}   </a>
 
                 <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
@@ -55,66 +54,66 @@
         </div>
     </nav>
 </header>
+{% block content %}
+    <main role="main">
 
-<main role="main">
-
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">Platforms</h1>
-            <p class="lead text-muted">
-
-
-            </p>
-            <p>
-                <a href="#" class="btn btn-secondary my-2">Steam</a>
-                <a href="#" class="btn btn-secondary my-2">Origin</a>
-                <a href="#" class="btn btn-secondary my-2">Uplay</a>
-                <a href="#" class="btn btn-secondary my-2">Battlenet</a>
-            </p>
-        </div>
-    </section>
-    {% for object in object_list %}
-
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-
-                <div class="card-body">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Platforms</h1>
+                <p class="lead text-muted">
 
 
-                    <ul class="list-group">
-                        <li class="list-group-item">Description: {{ object.description }}</li>
-                        <li class="list-group-item">price:{{ object.price }}</li>
-                        <li class="list-group-item">platform:{{ object.platform }}</li>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-secondary my-2">Steam</a>
+                    <a href="#" class="btn btn-secondary my-2">Origin</a>
+                    <a href="#" class="btn btn-secondary my-2">Uplay</a>
+                    <a href="#" class="btn btn-secondary my-2">Battlenet</a>
+                </p>
+            </div>
+        </section>
+        {% for object in object_list %}
 
-                        <li class="list-group-item">{{ object.games.1 }}</li>
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+
+                    <div class="card-body">
 
 
-                    </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item">Description: {{ object.description }}</li>
+                            <li class="list-group-item">price:{{ object.price }}</li>
+                            <li class="list-group-item">platform:{{ object.platform }}</li>
+
+                            <li class="list-group-item">{{ object.games.1 }}</li>
 
 
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
+                        </ul>
 
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
+
+                            </div>
+                            <small class="text-muted">{{ object.date_of_creation }}</small>
                         </div>
-                        <small class="text-muted">{{ object.date_of_creation }}</small>
                     </div>
                 </div>
             </div>
+
+
+        {% endfor %}
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+
+
         </div>
+    </footer>
 
-
-    {% endfor %}
-</main>
-
-<footer class="text-muted">
-    <div class="container">
-        <p class="float-right">
-
-
-    </div>
-</footer>
-
-</body>
+    </body>
 {% endblock %}
 </html>

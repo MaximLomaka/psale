@@ -1,20 +1,13 @@
-# Create your views here.
-import token
-
-from django.core.mail import EmailMessage
-
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views.generic import CreateView, TemplateView
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
+from django.views.generic import CreateView, TemplateView, DetailView
 
-from auth.email import check_password_by_email
+from auth.email import check_user_by_email
 from auth.forms import UserCreate, UserLogin
 from auth.tokens import account_activation_token
 
@@ -33,12 +26,16 @@ class UserSignUpView(CreateView):
         user.email = form.cleaned_data.get('email')
         user.save()
         current_site = get_current_site(self.request)
-        check_password_by_email(user, user.email, current_site)
+        check_user_by_email(user, user.email, current_site)
 
         return redirect('auth:login')
 
 
-class UserLoginView(LoginView):
+class UserDetailView(DetailView):
+    pass
+
+
+class UserSigninView(LoginView):
     '''login view'''
     authentication_form = UserLogin
     template_name = 'auth/login.html'
@@ -66,7 +63,6 @@ class ActivateUserView(TemplateView):
             user.is_active = True
             user.save()
             login(request, user)
-            # return redirect('home')
             return render(self.request, 'auth/activation_info.html',
                           context={'message': 'Thank you for your email confirmation. Now you can login your account.'})
         else:

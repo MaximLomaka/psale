@@ -1,15 +1,15 @@
-from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LoginView, password_reset, password_reset_done, password_reset_confirm, \
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, \
     password_reset_complete
-from django.urls import path, include
+from django.urls import path
 
-from auth.views import UserSignUpView, UserLoginView, ActivateUserView
+from auth.views import UserSignUpView, ActivateUserView, UserSigninView, UserDetailView
 
 app_name = 'auth'
 urlpatterns = [
-
-    path('login/', UserLoginView.as_view(), name='login'),
+    path('<int:pk>/', login_required(UserDetailView.as_view()), name='user_detail'),
+    path('login/', UserSigninView.as_view(), name='login'),
     path('signup/', UserSignUpView.as_view(), name='signup'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('activate/<str:uidb64>/<str:token>', ActivateUserView.as_view(), name='activate'),
