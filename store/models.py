@@ -34,11 +34,11 @@ class Advertisement(Model):
         ('uplay', 'uplay'),
         ('battlenet', 'battlenet'),
     )
-    price = PositiveIntegerField()
+    price = PositiveIntegerField(null=True)
     description = CharField(max_length=50, null=True)
-    platform = CharField(max_length=20, choices=PLATFORMS)
-    date_of_creation = DateTimeField(default=datetime.now())
+    platform = CharField(max_length=20, choices=PLATFORMS, null=True)
+    date_of_creation = DateTimeField(default=datetime.now(), null=True)
     bid = PositiveIntegerField(null=True)
-    user = ForeignKey(User, on_delete=CASCADE, related_name='ad', related_query_name='ads')
+    user = ForeignKey(User, on_delete=CASCADE, related_name='ad', related_query_name='ads', null=True)
     games = ForeignKey(Game, related_name='game', related_query_name='games', on_delete=CASCADE, default=None,
                        null=True)
