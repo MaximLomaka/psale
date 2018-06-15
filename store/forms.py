@@ -4,7 +4,7 @@ from django.forms import ModelForm, CharField, PasswordInput
 from store.models import Money, Advertisement
 
 
-class AdForm(ModelForm):
+class AdvertisementForm(ModelForm):
     class Meta:
         model = Advertisement
         fields = ['bid', ]

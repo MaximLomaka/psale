@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.db.models import Model, CharField, IntegerField, DateTimeField, ForeignKey, CASCADE, \
-    ManyToManyField, OneToOneField, PositiveIntegerField
+    ManyToManyField, OneToOneField, PositiveIntegerField, DecimalField
 
 
 # class User(Model):
@@ -34,7 +34,7 @@ class Advertisement(Model):
         ('uplay', 'uplay'),
         ('battlenet', 'battlenet'),
     )
-    price = PositiveIntegerField(null=True)
+    price = DecimalField(null=True, max_digits=6, decimal_places=2)
     description = CharField(max_length=50, null=True)
     platform = CharField(max_length=20, choices=PLATFORMS, null=True)
     date_of_creation = DateTimeField(default=datetime.now(), null=True)

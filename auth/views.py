@@ -5,18 +5,18 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import CreateView, TemplateView, DetailView
+from django.views.generic import CreateView, TemplateView, DetailView, ListView
 
 from auth.email import check_user_by_email
 from auth.forms import UserCreate, UserLogin
 from auth.tokens import account_activation_token
+from store.models import Advertisement
 
 
 class UserSignUpView(CreateView):
     model = User
     form_class = UserCreate
     template_name = 'auth/sign_up.html'
-
 
     def form_invalid(self, form):
         return redirect('auth:signup')
@@ -32,10 +32,12 @@ class UserSignUpView(CreateView):
         return redirect('auth:login')
 
 
-class UserDetailView(DetailView):
-    queryset = User.objects.all()
+class UserDetailView(ListView):
+    queryset = Advertisement.objects.all().filter()
     template_name = 'auth/user-detail.html'
 
+    def get_queryset(self):
+        pass
 
 class UserSigninView(LoginView):
     '''login view'''
