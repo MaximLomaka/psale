@@ -11,14 +11,18 @@ class UserCreate(UserCreationForm):
     password2 = CharField(max_length=20, widget=PasswordInput())
 
     def clean(self):
+        '''check passwords validation'''
         cleaned_data = super(UserCreate, self).clean()
-        # print(cleaned_data)
+
         password = cleaned_data.get("password1")
         confirm_password = cleaned_data.get("password2")
 
         if password != confirm_password:
-            self.add_error('confirm_password', "Password does not match")
-
+            self.add_error('password2', "Password does not match")
+        elif password is None:
+            self.add_error('password1', 'Password can not be empty')
+        elif password.__len__ < 8:
+            self.add_error('password1', 'Password length must be greater then 8')
         return cleaned_data
 
 

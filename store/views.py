@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from django.views.generic import ListView, FormView, UpdateView
+from django.views.generic import ListView, FormView, UpdateView, DetailView
 from rest_framework.viewsets import ModelViewSet
 
 from store.forms import MoneyForm
@@ -24,10 +24,6 @@ class GetMonetView(UpdateView):
     template_name = 'store/user-detail.html'
     fields = ('coins',)
     success_url = '/'
-    # def get_object(self, queryset=None):
-    #     print(self.kwargs)
-    #     obj=Money.objects.all().filter(user_)
-    #     return obj
 
 
 class UserDetailView(FormView):

@@ -14,6 +14,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import CreateView, TemplateView
 
+from auth.email import check_password_by_email
 from auth.forms import UserCreate, UserLogin
 from auth.tokens import account_activation_token
 
@@ -27,31 +28,12 @@ class UserSignUpView(CreateView):
         return redirect('auth:signup')
 
     def form_valid(self, form):
-        print('dfsfsfas')
         user = form.save(commit=False)
         user.is_active = False
         user.email = form.cleaned_data.get('email')
         user.save()
         current_site = get_current_site(self.request)
-        mail_subject = 'Activate your account'
-        message = render_to_string('auth/active_email.html',
-                                   {
-                                       'user': user,
-                                       'domain': current_site.domain,
-                                       'uid': str(urlsafe_base64_encode(force_bytes(user.pk)), encoding='utf-8'),
-                                       'token': account_activation_token.make_token(user),
-                                   })
-        to_email = form.cleaned_data.get('email')
-        email = EmailMessage(
-            mail_subject, message, to=[to_email]
-        )
-        email.send()
-
-        # user.set_password(form['password'])
-        # save user with hashed password
-        # form.save()
-
-        # login(self.request, user)
+        check_password_by_email(user, user.email, current_site)
 
         return redirect('auth:login')
 

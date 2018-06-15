@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.db.models import Model, CharField, IntegerField, DateTimeField, ForeignKey, CASCADE, \
-    ManyToManyField, OneToOneField
+    ManyToManyField, OneToOneField, PositiveIntegerField
 
 
 # class User(Model):
@@ -18,7 +18,7 @@ from django.db.models import Model, CharField, IntegerField, DateTimeField, Fore
 #         return self.first_name + ' ' + self.last_name
 class Money(Model):
     user = OneToOneField(User, on_delete=CASCADE, related_query_name='moneys', related_name='money')
-    coins = IntegerField(default=0)
+    coins = PositiveIntegerField(default=0)
 
 
 class Game(Model):
@@ -27,7 +27,6 @@ class Game(Model):
     date_of_creation = DateTimeField(default=datetime.now())
 
 
-# ad = ForeignKey(Advertisement, on_delete=CASCADE, related_query_name='games', related_name='game')
 class Advertisement(Model):
     PLATFORMS = (
         ('steam', 'steam'),
@@ -35,10 +34,11 @@ class Advertisement(Model):
         ('uplay', 'uplay'),
         ('battlenet', 'battlenet'),
     )
-    price = IntegerField()
+    price = PositiveIntegerField()
     description = CharField(max_length=50, null=True)
     platform = CharField(max_length=20, choices=PLATFORMS)
     date_of_creation = DateTimeField(default=datetime.now())
-    bid = IntegerField(null=True)
+    bid = PositiveIntegerField(null=True)
     user = ForeignKey(User, on_delete=CASCADE, related_name='ad', related_query_name='ads')
-    games = ManyToManyField(Game, related_name='game', related_query_name='games')
+    games = ForeignKey(Game, related_name='game', related_query_name='games', on_delete=CASCADE, default=None,
+                       null=True)
