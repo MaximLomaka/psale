@@ -28,11 +28,14 @@
                 <strong>Store</strong>
             </a>
             {% if user.is_authenticated %}
+     
+
 
                 <a style="color: grey" href=" {% url 'store:money_detail' pk=user.id %}">
                     Balance: {{ user.money.coins }} $ </a>
                 <a style="color: grey" href="{% url 'auth:user_detail' pk=user.id %}">
                     Welcome, {{ user }}   </a>
+
 
                 <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
                 ></a>
@@ -75,7 +78,13 @@
                                 <li class="list-group-item">price:{{ object.price }}</li>
                                 <li class="list-group-item">platform:{{ object.platform }}</li>
 
+
                                 <li class="list-group-item">{{ object.games }}</li>
+===
+    <form method="get">
+
+
+
 
                             </ul>
 
