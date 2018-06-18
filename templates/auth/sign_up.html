@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="{% static  'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static  'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static  'bootstrap/css/style.css' %}">
+</head>
+
+<body class="text-center">
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <ul class="list-group-item ">
+
+        <li>username:{{ form.username }}</li>
+        <li>email {{ form.email }}</li>
+        <li>password:{{ form.password1 }}</li>
+        <li>confirm password{{ form.password2 }}</li>
+    </ul>
+
+    <button class="btn btn-lg btn-primary " type="submit">Sign in</button>
+
+</form>
+</body>
+</html>
+

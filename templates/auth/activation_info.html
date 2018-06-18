@@ -1,0 +1,8 @@
+{% block content %}
+    <div class="align-content-center">
+        <i class="fas fa-envelope fa-10x"></i>
+        <p>{{ message }}</p>
+
+    </div>
+    <a href="{% url 'auth:login' %}" class="btn btn-link">Back to Log In page</a>
+{% endblock %}

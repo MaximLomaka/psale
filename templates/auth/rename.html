@@ -1,0 +1,19 @@
+{% extends 'store/index.html' %}
+{% block title %}
+    <title>{{ user.username }}</title>
+{% endblock %}
+{% block content %}
+    <form class="form-signin" method="post">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+        <p> {{ form.as_p }}</p>
+        <button class="btn btn-lg btn-primary " type="submit">Sign in</button>
+
+        <p class="mt-5 mb-3 text-muted"><a href="{% url 'auth:reset_password' %}">Lost password?</a></p>
+        <a class="mt-5 mb-3 text-muted" href="{% url 'auth:signup' %}"> if you have no account you can create it
+            here</a>
+    </form>
+
+
+{% endblock %}
