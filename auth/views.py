@@ -4,14 +4,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import CreateView, ListView, TemplateView
+from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 from auth.email import check_user_by_email
 from auth.forms import UserCreate
 from auth.forms import UserLogin
 from auth.tokens import account_activation_token
 from store.models import Advertisement
+
+
+class UserRenameView(UpdateView):
+    model = User
+    template_name = 'auth/rename.html'
+    fields = ('email', 'username')
+    success_url = reverse_lazy('auth:user_detail')
 
 
 class UserSignUpView(CreateView):

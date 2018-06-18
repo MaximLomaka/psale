@@ -14,7 +14,6 @@
 
 <body class="text-center">
 
-
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -26,7 +25,6 @@
         <li>password:{{ form.password1 }}</li>
         <li>confirm password{{ form.password2 }}</li>
     </ul>
-
 
     <button class="btn btn-lg btn-primary " type="submit">Sign in</button>
 

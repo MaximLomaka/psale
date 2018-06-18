@@ -1,23 +1,8 @@
 {% extends 'store/index.html' %}
 {% block title %}
-    <title>Login</title>
+    <title>{{ user.username }}</title>
 {% endblock %}
 {% block content %}
-
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
-
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-                please login with an account that has access.</p>
-        {% else %}
-            <p>Please login to see this page.</p>
-        {% endif %}
-    {% endif %}
-
-    <body class="text-center">
     <form class="form-signin" method="post">
         {% csrf_token %}
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -30,5 +15,5 @@
             here</a>
     </form>
 
-    <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
+
 {% endblock %}
