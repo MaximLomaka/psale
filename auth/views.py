@@ -1,19 +1,21 @@
-from django.contrib.auth import login, authenticate
+'''views for authentication'''
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import CreateView, TemplateView, DetailView, ListView
-
+from django.views.generic import CreateView, ListView, TemplateView
 from auth.email import check_user_by_email
-from auth.forms import UserCreate, UserLogin
+from auth.forms import UserCreate
+from auth.forms import UserLogin
 from auth.tokens import account_activation_token
 from store.models import Advertisement
 
 
 class UserSignUpView(CreateView):
+    '''regestration new user'''
     model = User
     form_class = UserCreate
     template_name = 'auth/sign_up.html'
@@ -39,6 +41,7 @@ class UserDetailView(ListView):
     def get_queryset(self):
         pass
 
+
 class UserSigninView(LoginView):
     '''login view'''
     authentication_form = UserLogin
@@ -61,14 +64,15 @@ class ActivateUserView(TemplateView):
         try:
             uid = force_text(urlsafe_base64_decode(kwargs['uidb64']))
             user = User.objects.get(pk=uid)
-        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        except(TypeError, ValueError, OverflowError):
             user = None
         if user is not None and account_activation_token.check_token(user, kwargs['token']):
             user.is_active = True
             user.save()
             login(request, user)
             return render(self.request, 'auth/activation_info.html',
-                          context={'message': 'Thank you for your email confirmation. Now you can login your account.'})
+                          context={'message': 'Thank you for your email confirmation.'
+                                              ' Now you can login your account.'})
         else:
             return render(self.request, 'auth/activation_info.html',
                           context={'message': 'Activation link is invalid!'})

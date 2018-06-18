@@ -1,3 +1,4 @@
+'''urks for authentication'''
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, \
@@ -14,8 +15,10 @@ urlpatterns = [
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('activate/<str:uidb64>/<str:token>', ActivateUserView.as_view(), name='activate'),
     path('reset-password/', password_reset,
-         {'template_name': 'auth/reset_password.html', 'post_reset_redirect': 'auth:password_reset_done',
-          'email_template_name': 'auth/reset_password_email.html'}, name='reset_password'),
+         {'template_name': 'auth/reset_password.html',
+          'post_reset_redirect': 'auth:password_reset_done',
+          'email_template_name': 'auth/reset_password_email.html'},
+         name='reset_password'),
 
     path(r'reset-password/done/', password_reset_done, {'template_name': 'auth/reset_password_done.html'},
          name='password_reset_done'),

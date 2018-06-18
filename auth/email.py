@@ -1,3 +1,4 @@
+'''send email '''
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -13,7 +14,8 @@ def check_user_by_email(user, to_email, current_site):
                                {
                                    'user': user,
                                    'domain': current_site.domain,
-                                   'uid': str(urlsafe_base64_encode(force_bytes(user.pk)), encoding='utf-8'),
+                                   'uid': str(urlsafe_base64_encode(force_bytes(user.pk)),
+                                              encoding='utf-8'),
                                    'token': account_activation_token.make_token(user),
                                })
 

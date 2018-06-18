@@ -1,10 +1,11 @@
+'''forms for authentication'''
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.models import User
 
-from django.forms import ModelForm, CharField, PasswordInput, EmailField
+from django.forms import CharField, PasswordInput, EmailField
 
 
 class UserCreate(UserCreationForm):
+    '''form for user registration'''
     username = CharField(max_length=15)
     email = EmailField(max_length=24)
     password1 = CharField(max_length=20, widget=PasswordInput())
@@ -27,5 +28,6 @@ class UserCreate(UserCreationForm):
 
 
 class UserLogin(AuthenticationForm):
+    '''form for log in user'''
     username = CharField(max_length=15)
     password = CharField(max_length=15)
