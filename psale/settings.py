@@ -119,3 +119,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+try:
+    import local_settings
+except:
+    ImportError
+
+# for confirmation email
+EMAIL_USE_TLS = local_settings.EMAIL_USE_TLS
+EMAIL_HOST = local_settings.EMAIL_HOST
+EMAIL_HOST_USER = local_settings.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = local_settings.EMAIL_HOST_PASSWORD
+EMAIL_PORT = local_settings.EMAIL_PORT

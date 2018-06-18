@@ -1,6 +1,6 @@
+'''admin'''
 from django.contrib import admin
 
-# Register your models here.
 from store.models import Advertisement, Game, Money
 
 admin.site.register(Advertisement)

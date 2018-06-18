@@ -1,0 +1,16 @@
+{% extends 'store/index.html' %}
+{% block title %}
+    <title>{{ user.username }}</title>
+{% endblock %}
+{% block content %}
+
+    {% for object in object_list %}
+        {% if object %}
+
+        {% endif %}
+        {{ object }}
+    {% endfor %}
+    <a href="{% url 'auth:rename' pk=user.id %}">rename</a>
+    <a class="btn btn-primary" href="{% url 'store:create_ad' pk=user.id %}" role="button">Link</a>
+
+{% endblock %}

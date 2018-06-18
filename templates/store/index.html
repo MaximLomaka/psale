@@ -1,115 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" href="{% static  'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static  'bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static  'bootstrap/css/style.css' %}">
     {% block title %}
         <title>Store</title>
     {% endblock %}
 
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/style.css' %}">
 </head>
+
 <body>
 
+<header>
 
-<div>
-    <nav class="navbar  navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'store:index' %}"> <img src="{% static 'img/PSN-logo.jpg' %} "
-                                                                     width="40px " height="30px"> </a>
+    <nav class="navbar  navbar-dark bg-primary">
+        <div class="container d-flex justify-content-between">
+            <a href="{% url 'store:index' %}" class="navbar-brand d-flex align-items-center">
 
-        <ul class="nav navbar-nav  ml-auto">
+                <strong>Store</strong>
+            </a>
             {% if user.is_authenticated %}
      
 
 
-
-
-
-                <li>Balance: {{ user.money.coins }} $</li>
-                <li class="nav-item active"><a href="{% url 'store:user_detail' pk=user.id %}">
-                    Welcome, {{ user }}   </a></li>
+                <a style="color: grey" href=" {% url 'store:money_detail' pk=user.id %}">
+                    Balance: {{ user.money.coins }} $ </a>
+                <a style="color: grey" href="{% url 'auth:user_detail' pk=user.id %}">
+                    Welcome, {{ user }}   </a>
 
 
                 <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
                 ></a>
 
             {% else %}
-                <li class="nav-item active">
 
-                    <a class="nav-link" href="{% url 'auth:login' %}">log in </a>
+                <a class="nav-link" href="{% url 'auth:login' %}">log in </a>
 
-                </li>
                 <a class="nav-link" href="{% url 'auth:signup' %}">or sign up </a>
             {% endif %}
-
-        </ul>
-
+        </div>
     </nav>
-
-</div>
+</header>
 {% block content %}
+    <main role="main">
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Platforms</h1>
+                <p class="lead text-muted">
+
+                </p>
+                <p>
+                    <a href="#" class="btn btn-secondary my-2">Steam</a>
+                    <a href="#" class="btn btn-secondary my-2">Origin</a>
+                    <a href="#" class="btn btn-secondary my-2">Uplay</a>
+                    <a href="#" class="btn btn-secondary my-2">Battlenet</a>
+                </p>
+            </div>
+        </section>
+        {% for object in object_list %}
+            <div class="card-group">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+
+                        <div class="card-body">
+
+                            <ul class="list-group">
+                                <li class="list-group-item">Description: {{ object.description }}</li>
+                                <li class="list-group-item">price:{{ object.price }}</li>
+                                <li class="list-group-item">platform:{{ object.platform }}</li>
 
 
-
+                                <li class="list-group-item">{{ object.games }}</li>
+===
     <form method="get">
 
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Select Platform</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>PS4</option>
-                <option>XboX one</option>
-                <option>PC</option>
-
-            </select>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-        </div>
-
-    </form>
 
 
+                            </ul>
 
-        <div class="card border-secondary  mb-3" style="max-width: 18rem;">
-            <div class="card-header" href="1">Battle net</div>
-            <div class="card-body text-secondary">
-                <h5 class="card-title">Games:</h5>
-                <ul>
-                    <li>Starcraft 2</li>
-                    <li>WoW</li>
-                </ul>
-                <a href="2" class="btn btn-primary"> Buy</a>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                    <a href="{% url 'store:detail' pk=object.id %}">Buy</a>
+                                </div>
+                                <small class="text-muted">{{ object.date_of_creation }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+        {% endfor %}
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
 
         </div>
+    </footer>
 
-
-    <br>
-    <h3 class="mr-4">Buyer protection</h3>
-
-    {% if messages %}
-
-        {% for message in messages %}
-            <h3 class="alert-success success">{{ message }}</h3>
-
-        {% endfor %}
-    {% endif %}
-
+    </body>
 {% endblock %}
-
-<script src="{% static  'js/main.js' %}"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-</body>
 </html>
