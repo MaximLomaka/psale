@@ -17,9 +17,19 @@ class AdListView(ListView):
     queryset = Advertisement.objects.all()
 
 
+class UserAdvertisementListView(ListView):
+    '''display only user's advertisements'''
+
+    def get_queryset(self):
+        queryset = Advertisement.objects.all().filter(user_id=self.kwargs['pk'])
+        return queryset
+
+    template_name = 'store/index.html'
+
+
 class AdDetailView(UpdateView):
     '''view  for change advertisement '''
-    template_name = 'store/detail.html'
+    template_name = 'store/user_ads.html'
     model = Advertisement
     form_class = AdvertisementForm
 
@@ -37,6 +47,10 @@ class MoneyUpdateView(UpdateView):
     template_name = 'store/money_detail.html'
     form_class = MoneyForm
     success_url = reverse_lazy('store:index')
+
+    def get_object(self, queryset=None):
+        obj = Money.objects.get(user_id=self.kwargs['pk'])
+        return obj
 
 
 class CreateAd(CreateView):

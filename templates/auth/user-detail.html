@@ -11,6 +11,6 @@
         {{ object }}
     {% endfor %}
     <a href="{% url 'auth:rename' pk=user.id %}">rename</a>
-    <a class="btn btn-primary" href="{% url 'store:create_ad' pk=user.id %}" role="button">Link</a>
-
+    <a class="btn btn-primary" href="{% url 'store:create_ad' pk=user.id %}" role="button">create advertisement</a>
+    <a class="btn btn-primary" href="{% url 'store:user_ads' pk=user.id %}" role="button">My advertisements</a>
 {% endblock %}

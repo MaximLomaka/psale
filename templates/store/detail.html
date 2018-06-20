@@ -4,12 +4,8 @@
 {% endblock %}
 {% block content %}
     <h3>You wanna buy this account? </h3>
-    <h4>Price:45</h4>
-    <ul>Games:
-        <li>Starcraf2</li>
-        <li>Hearthstone</li>
-
-    </ul>
+    <h4>Price:{{ object.price }}</h4>
+    <p>   Games:    {{ object.games }} </p>
 
     <form class="form-inline" method="post">
         {% csrf_token %}
