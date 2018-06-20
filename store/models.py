@@ -1,7 +1,9 @@
 '''main models '''
 from datetime import datetime
 
+from decimal import Decimal
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db.models import Model, CharField, DateTimeField, ForeignKey, CASCADE, \
     OneToOneField, PositiveIntegerField, DecimalField
 
@@ -27,12 +29,11 @@ class Advertisement(Model):
         ('uplay', 'uplay'),
         ('battlenet', 'battlenet'),
     )
-    price = DecimalField(null=True, max_digits=6, decimal_places=2)
+    price = DecimalField(null=True, max_digits=6, decimal_places=2,validators=[MinValueValidator(Decimal('0.01'))])
     description = CharField(max_length=50, null=True)
     platform = CharField(max_length=20, choices=PLATFORMS, null=True)
     date_of_creation = DateTimeField(default=datetime.now(), null=True)
     bid = PositiveIntegerField(null=True)
     user = ForeignKey(User, on_delete=CASCADE, related_name='ad',
                       related_query_name='ads', null=True)
-    games = ForeignKey(Game, related_name='game', related_query_name='games',
-                       on_delete=CASCADE, default=None, null=True)
+    games = CharField(max_length=20, null=True)

@@ -22,8 +22,6 @@ class UserCreate(UserCreationForm):
             self.add_error('password2', "Password does not match")
         elif password is None:
             self.add_error('password1', 'Password can not be empty')
-        elif password.__len__ < 8:
-            self.add_error('password1', 'Password length must be greater then 8')
         return cleaned_data
 
 
