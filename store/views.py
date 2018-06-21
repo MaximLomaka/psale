@@ -29,7 +29,7 @@ class UserAdvertisementListView(ListView):
 
 class AdDetailView(UpdateView):
     '''view  for change advertisement '''
-    template_name = 'store/user_ads.html'
+    template_name = 'store/detail.html'
     model = Advertisement
     form_class = AdvertisementForm
 
@@ -37,7 +37,16 @@ class AdDetailView(UpdateView):
         return redirect('store:detail', pk=self.kwargs['pk'])
 
     def form_valid(self, form):
-        form.save()
+        money = self.request.user.money.coins
+        bid = form.cleaned_data['bid']
+        if money >= bid:
+            seller = User.objects.all().filter(ads=self.kwargs['pk'])
+            buyer = self.request.user
+            buyer.money.coins -= bid
+            buyer.money.save()
+            print(seller)
+            print(buyer)
+            form.save()
         return redirect('store:detail', pk=self.kwargs['pk'])
 
 

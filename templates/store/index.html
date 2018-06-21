@@ -29,8 +29,6 @@
             </a>
             {% if user.is_authenticated %}
 
-
-
                 <a style="color: grey" href=" {% url 'store:money_detail' pk=user.id %}">
                     Balance: {{ user.money.coins }} $ </a>
 
