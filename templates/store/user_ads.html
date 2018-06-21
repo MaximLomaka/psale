@@ -12,16 +12,16 @@
 
                             <ul class="list-group">
                                 <li class="list-group-item">Description: {{ object.description }}</li>
-                                <li class="list-group-item">price:{{ object.price }}</li>
-                                <li class="list-group-item">platform:{{ object.platform }}</li>
-                                <li class="list-group-item">{{ object.games }}</li>
+                                <li class="list-group-item">price: {{ object.price }}</li>
+                                <li class="list-group-item">platform: {{ object.platform }}</li>
+                                <li class="list-group-item">Games: {{ object.games }}</li>
 
                             </ul>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
 
-                                    <a href="{% url 'store:detail' pk=object.id %}">sell</a>
+                                    <a href="{% url 'store:detail' pk=object.id %}">sell for {{ object.bid }} coins</a>
                                 </div>
                                 <small class="text-muted">{{ object.date_of_creation }}</small>
                             </div>

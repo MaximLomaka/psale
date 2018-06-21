@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, UpdateView, CreateView
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from rest_framework.viewsets import ModelViewSet
 
@@ -24,7 +24,14 @@ class UserAdvertisementListView(ListView):
         queryset = Advertisement.objects.all().filter(user_id=self.kwargs['pk'])
         return queryset
 
-    template_name = 'store/index.html'
+    template_name = 'store/user_ads.html'
+
+
+class SellAdvertisementView(DeleteView):
+    def get_queryset(self):
+        queryset = Advertisement.objects.all().filter(user_id=self.kwargs['pk'])
+        return queryset
+    template_name = 'store/sell_ad.html'
 
 
 class AdDetailView(UpdateView):
@@ -40,12 +47,13 @@ class AdDetailView(UpdateView):
         money = self.request.user.money.coins
         bid = form.cleaned_data['bid']
         if money >= bid:
-            seller = User.objects.all().filter(ads=self.kwargs['pk'])
+            seller = User.objects.get(ads=self.kwargs['pk'])
             buyer = self.request.user
             buyer.money.coins -= bid
             buyer.money.save()
-            print(seller)
-            print(buyer)
+            seller.money.coins += bid
+            seller.money.save()
+            print(seller.money.coins)
             form.save()
         return redirect('store:detail', pk=self.kwargs['pk'])
 
