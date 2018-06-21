@@ -5,11 +5,10 @@ from django.contrib.auth.views import password_reset, password_reset_done, passw
     password_reset_complete
 from django.urls import path
 
-from auth.views import UserSignUpView, ActivateUserView, UserSigninView, UserDetailView, UserRenameView
+from auth.views import UserSignUpView, ActivateUserView, UserSigninView,  UserRenameView
 
 app_name = 'auth'
 urlpatterns = [
-    path('<int:pk>/', login_required(UserDetailView.as_view()), name='user_detail'),
     path('login/', UserSigninView.as_view(), name='login'),
     path('signup/', UserSignUpView.as_view(), name='signup'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),

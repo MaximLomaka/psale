@@ -42,12 +42,6 @@ class UserSignUpView(CreateView):
         return redirect('auth:login')
 
 
-class UserDetailView(ListView):
-    queryset = Advertisement.objects.all().filter()
-    template_name = 'auth/user-detail.html'
-
-    def get_queryset(self):
-        pass
 
 
 class UserSigninView(LoginView):

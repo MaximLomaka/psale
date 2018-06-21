@@ -28,4 +28,4 @@ class UserCreate(UserCreationForm):
 class UserLogin(AuthenticationForm):
     '''form for log in user'''
     username = CharField(max_length=15)
-    password = CharField(max_length=15)
+    password = CharField(max_length=15,widget=PasswordInput())

@@ -28,17 +28,29 @@
                 <strong>Store</strong>
             </a>
             {% if user.is_authenticated %}
-     
+
 
 
                 <a style="color: grey" href=" {% url 'store:money_detail' pk=user.id %}">
                     Balance: {{ user.money.coins }} $ </a>
-                <a style="color: grey" href="{% url 'auth:user_detail' pk=user.id %}">
-                    Welcome, {{ user }}   </a>
 
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Welcome, {{ user }}
+                    </a>
 
-                <a href="{% url 'auth:logout' %}"> <img src="{% static 'png/account-logout-2x.png' %}"
-                ></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'auth:rename' pk=user.id %}">rename</a>
+                        <a class="dropdown-item" href="{% url 'store:create_ad' pk=user.id %}">create
+                            advertisement</a>
+                         <a class="dropdown-item" href="{% url 'store:user_ads' pk=user.id %}">My advertisements
+
+                         </a>
+
+                        <a class="dropdown-item" href="{% url 'auth:logout' %}">Logout</a>
+                    </div>
+                </div>
 
             {% else %}
 
@@ -105,4 +117,13 @@
 
     </body>
 {% endblock %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </html>
