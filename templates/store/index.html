@@ -29,8 +29,7 @@
             </a>
             {% if user.is_authenticated %}
 
-                <a style="color: grey" href=" {% url 'store:money_detail' pk=user.id %}">
-                    Balance: {{ user.money.coins }} $ </a>
+
 
                 <div class="dropdown show">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -39,8 +38,10 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'auth:rename' pk=user.id %}">rename</a>
-                        <a class="dropdown-item" href="{% url 'store:create_ad' pk=user.id %}">create
+                        <a class="dropdown-item" href=" {% url 'store:money_detail' pk=user.id %}">
+                            Balance: {{ user.money.coins }} $ </a>
+                        <a class="dropdown-item" href="{% url 'auth:rename' pk=user.id %}">Change your data</a>
+                        <a class="dropdown-item" href="{% url 'store:create_ad' pk=user.id %}">Create
                             advertisement</a>
                          <a class="dropdown-item" href="{% url 'store:user_ads' pk=user.id %}">My advertisements
 
@@ -52,9 +53,9 @@
 
             {% else %}
 
-                <a class="nav-link" href="{% url 'auth:login' %}">log in </a>
+                <a class="nav-link" href="{% url 'auth:login' %}">Log in </a>
 
-                <a class="nav-link" href="{% url 'auth:signup' %}">or sign up </a>
+                <a class="nav-link" href="{% url 'auth:signup' %}"> Sign up </a>
             {% endif %}
         </div>
     </nav>

@@ -1,0 +1,14 @@
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_cnbXYJ3ouldzvt1hJ8edq9G6"
+            data-amount="999"
+            data-name="Demo Site"
+            data-description="Example charge"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto"
+    >
+    </script>
+</form>

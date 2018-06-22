@@ -28,11 +28,16 @@
             </div>
         </div>
 
-        <button class="btn btn-lg btn-primary " type="submit">Buy</button>
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_cnbXYJ3ouldzvt1hJ8edq9G6"
+                data-amount="999"
+                data-name="Demo Site"
+                data-description="Example charge"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto">
+        </script>
     </form>
-    <script>
-        const date = document.getElementById('date');
-        date.value = YYYY - MM;
-    </script>
+
 
 {% endblock %}
